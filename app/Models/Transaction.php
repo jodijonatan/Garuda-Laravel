@@ -23,4 +23,20 @@ class Transaction extends Model
         'subtotal',
         'grandtotal'
     ];
+
+    public function flight() {
+        return $this->belongsTo(Flight::class);
+    }
+
+    public function class() {
+        return $this->belongsTo(FlightClass::class);
+    }
+
+    public function promo() {
+        return $this->belongsTo(PromoCode::class);
+    }
+
+    public function passengers() {
+        return $this->hasMany(TransactionPassenger::class);
+    }
 }
