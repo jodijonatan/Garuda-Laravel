@@ -42,13 +42,18 @@ class AirportResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\ImageColumn::make('image'),
+                Tables\Columns\TextColumn::make('iata_code'),
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('city'),
+                Tables\Columns\TextColumn::make('country')
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
