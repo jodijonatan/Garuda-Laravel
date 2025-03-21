@@ -23,7 +23,18 @@ class AirportResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\FileUpload::make('image')->image()->directory('airports')->required()->columnSpan(2)
+                Forms\Components\FileUpload::make('image')
+                ->image()
+                ->directory('airports')->required()
+                ->columnSpan(2), 
+                Forms\Components\TextInput::make('iata_code')
+                ->required(),
+                Forms\Components\TextInput::make('name')
+                ->required(),
+                Forms\Components\TextInput::make('city')
+                ->required(),
+                Forms\Components\TextInput::make('country')
+                ->required()
             ]);
     }
 
