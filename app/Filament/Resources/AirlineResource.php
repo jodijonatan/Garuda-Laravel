@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\AirportResource\Pages;
-use App\Filament\Resources\AirportResource\RelationManagers;
-use App\Models\Airport;
+use App\Filament\Resources\AirlineResource\Pages;
+use App\Filament\Resources\AirlineResource\RelationManagers;
+use App\Models\Airline;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,9 +13,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class AirportResource extends Resource
+class AirlineResource extends Resource
 {
-    protected static ?string $model = Airport::class;
+    protected static ?string $model = Airline::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -23,17 +23,13 @@ class AirportResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\FileUpload::make('image')
+                Forms\Components\FileUpload::make('logo')
                 ->image()
-                ->directory('airports')->required()
+                ->directory('airline')->required()
                 ->columnSpan(2), 
-                Forms\Components\TextInput::make('iata_code')
+                Forms\Components\TextInput::make('code')
                 ->required(),
                 Forms\Components\TextInput::make('name')
-                ->required(),
-                Forms\Components\TextInput::make('city')
-                ->required(),
-                Forms\Components\TextInput::make('country')
                 ->required()
             ]);
     }
@@ -42,11 +38,9 @@ class AirportResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('image'),
-                Tables\Columns\TextColumn::make('iata_code'),
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('city'),
-                Tables\Columns\TextColumn::make('country')
+                Tables\Columns\ImageColumn::make('logo'),
+                Tables\Columns\TextColumn::make('code'),
+                Tables\Columns\TextColumn::make('name')
             ])
             ->filters([
                 //
@@ -73,9 +67,9 @@ class AirportResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListAirports::route('/'),
-            'create' => Pages\CreateAirport::route('/create'),
-            'edit' => Pages\EditAirport::route('/{record}/edit'),
+            'index' => Pages\ListAirlines::route('/'),
+            'create' => Pages\CreateAirline::route('/create'),
+            'edit' => Pages\EditAirline::route('/{record}/edit'),
         ];
     }
 }
