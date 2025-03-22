@@ -24,20 +24,20 @@ class FlightResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Wizard::make([
-                    Forms\Components\Wizard\Step::make('Order')
+                    Forms\Components\Wizard\Step::make('Flight Information')
                 ->schema([
 
                 ]),
-                Forms\Components\Wizard\Step::make('Delivery')
+                Forms\Components\Wizard\Step::make('Flight Segments')
                 ->schema([
 
                 ]),
-                Forms\Components\Wizard\Step::make('Billing')
+                Forms\Components\Wizard\Step::make('Flight Class')
                 ->schema([
 
                 ]),
-                ])
-            ]);
+            ])->columnSpan(2)
+        ]);
     }
 
     public static function table(Table $table): Table
