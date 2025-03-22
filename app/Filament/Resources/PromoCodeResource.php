@@ -46,13 +46,22 @@ class PromoCodeResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('code'),
+                Tables\Columns\TextColumn::make('discount_type'),
+                Tables\Columns\TextColumn::make('discount')
+                ->formatStateUsing(fn(PromoCode $record): string => match ($record->discount_type) {
+                    'fixed' => 'Rp ' . number_format($record->discount, 0, ',', '.'),
+                    'percentage' => $record->discount . '%',
+                }),
+                Tables\Columns\ToggleColumn::make('is_used'),
             ])
             ->filters([
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
