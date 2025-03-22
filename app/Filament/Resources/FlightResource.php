@@ -3,16 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\FlightResource\Pages;
-use App\Filament\Resources\FlightResource\RelationManagers;
 use App\Models\Flight;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\Relationship;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class FlightResource extends Resource
 {
@@ -65,7 +61,7 @@ class FlightResource extends Resource
                         ->required(),
                         Forms\Components\TextInput::make('price')
                         ->required()
-                        ->prefix('IRD')
+                        ->prefix('IDR')
                         ->numeric()
                         ->minValue(0),
                         Forms\Components\TextInput::make('total_seats')
